@@ -1,4 +1,9 @@
 import asyncio
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+
 import logging
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
@@ -21,6 +26,7 @@ app = Client(
     api_hash=Config.API_HASH,
     bot_token=Config.BOT_TOKEN
 )
+
 
 call_py = PyTgCalls(app)
 
